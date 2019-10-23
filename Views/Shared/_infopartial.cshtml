@@ -1,0 +1,24 @@
+﻿@model Service.Models.ProviderInfo
+
+
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">Thank!! for Hiring Me you Can reach me on followwing number. </h4>
+    </div>
+
+
+   <div class="modal-body">
+
+       <div class="">
+           <div class="list-group-section">
+               <ul class="list-group">
+                   <li class="list-group-item">@Html.DisplayNameFor(model => model.MobileNumber)<span class="badge">@Html.DisplayFor(model => model.MobileNumber)</span></li>
+                   <li class="list-group-item">@Html.DisplayNameFor(model => model.AlternateNumber) <span class="badge">@Html.DisplayFor(model => model.AlternateNumber)</span></li>
+               </ul>
+           </div>
+       </div>
+
+      
+   </div>
+

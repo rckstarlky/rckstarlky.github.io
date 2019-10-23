@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Service.Models.Ienummsg>
+@{
+    ViewBag.Title = "GetInboxMsg";
+}
+
+<h4>User  Message</h4>
+
+
+<table class="table" id="userlist">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(p => p.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(p => p.mobilenumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(p => p.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(p => p.message)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mobilenumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.message)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    $(function () {
+        $("#userlist").dataTable();
+    })
+</script>
+

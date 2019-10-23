@@ -1,0 +1,252 @@
+﻿@model Service.Models.Provider
+@{
+    ViewBag.Title = "Index";
+}
+<style type="text/css">
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+
+    body {
+        font-family: Arial;
+        font-size: 10pt;
+    }
+</style>
+
+
+
+   
+
+<fieldset class="profile-container">
+    @using (Html.BeginForm("SaveProfile", "Provider", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+
+        <div class="white-box-container">
+            <div class="top-head-title">
+                <h3>Complete Your profile</h3>
+            </div>
+            <div class="profile-content">
+                <div class="form-group">
+                    <div class="col-xs-12 col-md-4 form-input-group">
+                        <label>UserNAme</label>
+                        @Html.TextBoxFor(p => p.UserNAme, new { @class="form-control", required = "required" })
+                    </div>
+                    <div class="col-xs-12 col-md-4 form-input-group">
+                        <label>Categeries</label>
+                        @Html.DropDownList("Select-Category", ViewBag.Categeries as SelectList,new { @class = "form-control", })
+                    </div>
+                    <div class="col-xs-12 col-md-4 form-input-group">
+                        <label>UserNAme</label>
+                        @Html.TextBoxFor(p => p.UserNAme, new { @class = "form-control", required = "required" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12 col-md-4 form-input-group">
+                        <label>City</label>
+                        @Html.TextBoxFor(p => p.city, new { @class = "form-control", required = "required" })
+                    </div>
+                    <div class="col-xs-12 col-md-4 form-input-group">
+                        <label>ZipCode</label>
+                        @Html.TextBoxFor(p => p.zipcode, new { @class = "form-control", @onchange = "getLocation();", @type = "number", required = "required" })
+                    </div>
+                    <div class="col-xs-12 col-md-4 form-input-group">
+                        <label>State</label>
+                        @Html.TextBoxFor(p => p.state, new { @class = "form-control", required = "required" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12 col-md-4 form-input-group">
+                        <label>Country</label>
+                        @Html.TextBoxFor(p => p.country, new { @class = "form-control", required = "required" })
+                    </div>
+                    <div class="col-xs-12 col-md-4 form-input-group">
+                        <label>MobilerNumber</label>
+                        @Html.TextBoxFor(p => p.mobilenumber, new { @class = "form-control", @type = "number", required = "required" })
+                    </div>
+                    <div class="col-xs-12 col-md-4 form-input-group">
+                        <label>AlternateNumber</label>
+                        @Html.TextBoxFor(p => p.alternatenumber, new { @class = "form-control", @type = "number", required = "required" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12 col-md-4 form-input-group">
+                        <label>AdharNumber</label>
+                        @Html.TextBoxFor(p => p.adharnumber, new { @class = "form-control", @type = "number", required = "required" })
+                    </div>
+                    <div class="col-xs-12 col-md-4 form-input-group">
+                        <label>Upload Profile Picture</label>
+                        <input class="form-control" type="file" name="file" />
+                    </div>
+                    
+                    @*<div class="col-xs-12 col-md-4 form-input-group">
+                        <label>DayStart</label>
+                        @Html.TextBoxFor(p => p.daystart, DateTime.Now.ToString("MM/dd/yyyy HH:mm"), new { @class = "from-date-picker", @readonly = "readonly", required = "required" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12 col-md-4 form-input-group">
+                        <label>DayEnd</label>
+                        @Html.TextBoxFor(p => p.dayend, DateTime.Now.ToString("MM/dd/yyyy HH:mm"), new { @class = "from-date-picker", @readonly = "readonly", required = "required" })
+                    </div>*@
+                    <div class="col-xs-12 col-md-4 form-input-group">
+                        @Html.HiddenFor(p => p.city)
+                        @Html.HiddenFor(p => p.country)
+                        @Html.HiddenFor(p => p.state)
+                    </div>
+                    
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12 col-md-12 form-input-group">
+                        <label>AboutMe</label>
+                        @Html.TextAreaFor(p => p.aboutme, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(p => p.aboutme)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12 col-md-12 form-input-group">
+                        @*<input type="submit" value="Save" />*@
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</fieldset>
+
+
+<script>function initMap() { console.log('lib loaded') }</script>
+@*<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCE719KmR3FYYG3zRMM0jvgkQsmM3xmr0U" type="text/javascript"></script>*@
+<script src='http://maps.googleapis.com/maps/api/js?v=3&sensor=false&amp;libraries=places&key=AIzaSyCE719KmR3FYYG3zRMM0jvgkQsmM3xmr0U'></script>
+<script src="~/Scripts/JS.js"></script>
+@*<script>
+        debugger;
+        $(document).ready(function () {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("ReadXml", "Home")',
+                dataType: "json",
+                async: true,
+                data: {},
+                success: function (data) {
+                    alert("Your Xml Is parsed")
+                }
+            });
+        });
+    </script>*@
+<script>
+    //$('#demo').datetimepicker({
+    //        inline:true,
+    //});
+    // get log
+    function response(obj) {
+        console.log(obj);
+    }
+
+    //get location
+    function getLocation() {
+        debugger;
+        getAddressInfoByZip(document.forms[0].zipcode.value);
+        //alert("Hii");
+    }
+
+    //getaddress
+    function getAddressInfoByZip(zip) {
+        debugger;
+        if (zip.length >= 5 && typeof google != 'undefined') {
+            if (typeof google == 'undefined') {
+                alert("Please enter correct Area Pin")
+            }
+            debugger;
+            var addr = {};
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': zip }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results.length >= 1) {
+                        for (var ii = 0; ii < results[0].address_components.length; ii++) {
+                            var street_number = route = street = city = state = zipcode = country = formatted_address = '';
+                            var types = results[0].address_components[ii].types.join(",");
+                            if (types == "street_number") {
+                                addr.street_number = results[0].address_components[ii].long_name;
+                            }
+                            if (types == "route" || types == "point_of_interest,establishment") {
+                                addr.route = results[0].address_components[ii].long_name;
+                            }
+                            //if (types == "sublocality,political" || types == "locality,political" || types == "neighborhood,political" || types == "administrative_area_level_3,political") {
+                            //    addr.city = (city == '' || types == "locality,political") ? results[0].address_components[ii].long_name : city;
+
+                            //    document.getElementById("City").value = addr.city;
+                            //}
+                            if (types == "administrative_area_level_1,political") {
+                                addr.state = results[0].address_components[ii].short_name;
+
+                                document.getElementById("State").value = addr.state;
+                            }
+                            if (types == "postal_code" || types == "postal_code_prefix,postal_code") {
+                                addr.zipcode = results[0].address_components[ii].long_name;
+                            }
+                            if (types == "country,political") {
+                                addr.country = results[0].address_components[ii].long_name;
+
+                                document.getElementById("Country").value = addr.country;
+                            }
+                        }
+                        addr.success = true;
+                        for (name in addr) {
+                            console.log('### google maps api ### ' + name + ': ' + addr[name]);
+                        }
+                        response(addr);
+
+                    } else {
+                        response({ success: false });
+                        alert("Please enter your correct Area Pincode/Zip Code");
+                    }
+                } else {
+                    response({ success: false });
+
+                    alert("Please enter your correct Area Pincode/Zip Code");
+                }
+            });
+        } else {
+            response({ success: false });
+            alert("Please enter your correct Area Pincode/Zip Code");
+        }
+    }
+
+    //Search city
+    const google = window.google;
+    google.maps.event.addDomListener(window, 'load', function () {
+        var places = new google.maps.places.Autocomplete(document.getElementById('City'));
+        google.maps.event.addListener(places, 'place_changed', function () {
+            debugger;
+
+            var place = places.getPlace();
+            var address = place.formatted_address;
+            $("#City").val(place.name);//region
+
+            //var latitude = place.geometry.location.A;
+            //var longitude = place.geometry.location.F;
+            //var mesg = "Address: " + address;
+            //mesg += "\nLatitude: " + latitude;
+            //mesg += "\nLongitude: " + longitude;
+            //alert(mesg);
+        });
+    });
+
+    ///get place by zipcode
+    //$("#Zipcode").blur(function () {
+    //    var el = $(this); if ((el.val().length == 5) && (is_int(el.val())))
+    //    {
+    //        $.ajax(
+    //          {
+    //              url: "http://zip.getziptastic.com/v2/IN/" + el.val(), cache: false, dataType: "json", type: "GET",
+    //              data: "zip=" + el.val(), success: function (result, success) { if (result.postal_code) { status = true; } $('#State').text(result.state); $('#City').text(result.city); },
+    //              error: function (result, success) { $("#Zipcode").slideDown(300); }
+    //          });
+    //    }
+    //});
+</script>

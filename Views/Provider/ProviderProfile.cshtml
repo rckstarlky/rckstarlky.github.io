@@ -1,0 +1,39 @@
+﻿@model Service.Models.displayprofile
+
+@{
+    ViewBag.Title = "ProviderProfile";
+}
+@{ 
+    var dsp = ViewData.Model;
+
+}
+<div>
+	<hr />
+    <dl class="dl-horizontal">
+
+        <dd>
+            @*@Html.DisplayFor(model => model.description)*@
+            @dsp.description
+        </dd>
+        <dd>
+            @*@Html.DisplayFor(model => model.name)*@
+            @dsp.name
+        </dd>
+        <dd>
+            @if (dsp.photo != null)
+            {
+                <img src="@Url.Content(dsp.photo) " height="150" width="150" />
+
+            }
+            else
+            {
+                <img src="smiley.gif" alt="Picture not found" width="42" height="42">
+            }
+        </dd>
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("EditProviderprofile", "Provider", new { id = Model.id }) |*@
+    @Html.ActionLink("Editprovider", "Provider", new { id =dsp.id }) |
+    @*@Html.ActionLink("Profile Setting","EditProviderprofile", "Provider",null, new { id = Model.id })*@
+</p>

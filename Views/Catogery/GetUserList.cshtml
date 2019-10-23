@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Service.Models.AspNetUser>
+@{
+    ViewBag.Title = "GetUserList";
+}
+
+
+<div class="get-provide-section">
+    <div class="white-box-container">
+        <div class="top-head-title">
+            <h3>Users Registered With The service Finder PVt Ltd.</h3>
+            <p>
+                @if (ViewBag.Userlist != null)
+                {
+                    @ViewBag.Userlist
+                }
+            </p>
+        </div>
+        <div class="col-md-12 provide-table">
+            <table class="table" id="userlist">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(p => p.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(p => p.FirstName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(p => p.LastName)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            @*<td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                                </td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12 dashboard-btn">
+            @Html.ActionLink("Back to Admin Dashboard", "Index", "Admin")
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("#userlist").dataTable();
+    })
+</script>
+
+
+@*DIV TO BE REPLSCED*@
+
+
+

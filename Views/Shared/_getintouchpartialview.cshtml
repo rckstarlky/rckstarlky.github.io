@@ -1,0 +1,91 @@
+﻿@model Service.Models.Contactus
+<div class="find-touch-section">
+    <div class="white-box-container">
+        <div class="row">
+            <h4 class="touch-title">Happy to listen from you!!</h4>
+            <div class="col-xs-12 col-lg-12">
+                
+
+                <div class="form-horizontal">
+
+
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+            
+                        <div class="col-md-4 touch-input-group">
+                            @Html.LabelFor(model => model.Name, new { @class = "control-label1", required = "required" })
+                            @Html.EditorFor(model => model.Name)
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+                        <div class="col-md-4 touch-input-group">
+                            @Html.LabelFor(model => model.Email, new { @class = "control-label1", required = "required" })
+                            @Html.EditorFor(model => model.Email)
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+                        <div class="col-md-4 touch-input-group">
+                            @Html.LabelFor(model => model.mobilenumber, new { @class = "control-label1", required = "required", @type = "number" })
+                            @Html.EditorFor(model => model.mobilenumber)
+                            @Html.ValidationMessageFor(model => model.mobilenumber)
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                       
+                        <div class="col-md-12 touch-input-group">
+                            @Html.LabelFor(model => model.Message, new { @class = "control-label1", required = "required" })
+                            @Html.TextAreaFor(model => model.Message)
+                            @Html.ValidationMessageFor(model => model.Message)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="submit" id="getinmsg" value="Send" class="btn btn-primary" />
+                        </div>
+                    </div>
+                    @*<div id='myModal' class='modal'>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div id='myModalContent'>
+                                    <h4>Thanks for contacting us!!</h4>
+                                   <input type="button"  onclick="callback()"value="Ok"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+                    <script>
+
+                        var j = jQuery.noConflict();
+                        j("#getinmsg").click(function () {
+                            debugger;
+                            var name = $("#Name").val();
+                            var email = $("#Email").val();
+                            var mobilenumber = $("#mobilenumber").val();
+                            var mesassge = $("#Message").val();
+                            $.ajax({
+                                type: 'POST',
+                                dataType: 'json',
+                                url: '@Url.Action("GetInboxMsg", "Admin")',
+                                // url: '/Admin/GetInboxMsg',
+                                data: { name: name, email: email, mobilenumber: mobilenumber, mesassge: mesassge },
+                                success: function (Data) {
+                                    // $("#myModal").modal('show');
+                                    alert("Thanks for contacting us!!");
+                                    $("#Name").val('');
+                                    $("#Email").val('');
+                                    $("#mobilenumber").val('');
+                                    $("#Message").val('');
+                                },
+                                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                                    alert("Error Ocucred while processing your request ");
+                                }
+                            });
+                        });
+                    </script>
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>

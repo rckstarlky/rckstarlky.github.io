@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Service.Models.MsgList>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="admin-section">
+    <div class="white-box-container">
+        <div class="row">
+            
+            @Html.ValidationSummary(true)
+
+            <div class="col-xs-12 col-md-3">
+                <div class="row"><div class="top-head-title"><h3>Admin DashBoard</h3></div></div>
+
+                <ul class="list-group">
+
+                    <li class="list-group-item">
+                        @Html.ActionLink("Get all added Category", "Index", "Catogery")<br />
+                    </li>
+                    <li class="list-group-item">
+                        @Html.ActionLink("Get Provider List", "GetproviderLIst", "Catogery")<br />
+                    </li>
+                    <li class="list-group-item">
+                        @Html.ActionLink("Get User List", "GetUserList", "Catogery")<br />
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="col-xs-12 col-md-9">
+                <div class="get-provide-section">
+
+                    <div class="top-head-title">
+                        <h3>User  Message.</h3>
+                    </div>
+                    <div class="col-md-12 provide-table">
+                        <table class="table" id="userlist">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(p => p.Email)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(p => p.mobilenumber)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(p => p.Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(p => p.message)
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.mobilenumber)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.message)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+@* div to be replaced*@
+
+
+<script>
+    $(function () {
+        $("#userlist").dataTable();
+    })
+</script>

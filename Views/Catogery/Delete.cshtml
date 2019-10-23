@@ -1,0 +1,45 @@
+﻿@model Service.Models.Categery
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <section id="loginForm" class="edit-form-container">
+            <div class="white-box-container">
+                <div class="row"> <div class="top-head-title"><h3 class="text-left">Are you sure want to delete this category.</h3></div></div>
+                <div class="login-form-text">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                @Html.LabelFor(model => model.Category, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.Category, new { @class = "form-control", @required = "required" })
+                                @Html.ValidationMessageFor(model => model.Category)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 input-group-textaera">
+                                @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+                                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @required = "required" })
+                                @Html.ValidationMessageFor(model => model.Description)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="col-md-12 dashboard-btn">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

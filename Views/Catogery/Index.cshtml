@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Service.Models.Categery>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@*Div to be replace*@
+<div class="get-provide-section">
+    <div class="white-box-container">
+        <div class="top-head-title">
+            <h3>All added category.</h3>
+            <div class="add-category-btn">
+                @Html.ActionLink("Add New Category", "Create") 
+            </div>
+        </div>
+        <div class="col-md-12 provide-table">
+            <table class="table" id="alladdedcategory">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Category)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Category)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-12 dashboard-btn">
+            @Html.ActionLink("Back to Admin Dashboard", "Index", "Admin")
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#alladdedcategory").dataTable();
+    })
+</script>
